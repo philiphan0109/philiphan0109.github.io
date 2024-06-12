@@ -4,7 +4,6 @@
 format: jb-book
 root: intro
 chapters:
-  - file: links
   - file: evaluation_metrics
   - file: baseline
   - file: case_study

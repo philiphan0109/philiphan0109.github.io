@@ -8,7 +8,7 @@ Aspect Recall @K measures the fraction of study aspects covered by a set of K re
 
 $$
 \text{Aspect Recall @K} = \frac{1}{m} \sum_{f_j} \mathbf{1} \left( \sum_{s_i} S(s_i, f_j) \geq 1 \right)
-$$
+$$ 
 
 This metric evaluates how well the retrieved sentences cover the relevant study aspects.
 
