@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Evaluation Metric Explanations &#8212; Evidence Bench</title>
+    <title>Evaluation Metrics &amp; Task Definition &#8212; Evidence Bench</title>
   
   
   
@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'evaluation_metrics';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -173,9 +175,9 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluation Metric Explanations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluation Metrics &amp; Task Definition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="case_study.html">Example / Case Study</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model_leaderboard.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_leaderboard.html">Model Leaderboard</a></li>
 </ul>
 
     </div>
@@ -348,7 +350,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -359,11 +363,32 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Evaluation Metric Explanations</h1>
+    <h1>Evaluation Metrics & Task Definition</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics">Evaluation Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aspect-recall-k">Aspect Recall @K</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definitions">Task Definitions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-optimal-er-optimal">1. Evidence Retrieval @Optimal (ER @optimal)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-10-er-10">2. Evidence Retrieval @10 (ER @10)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-optimal-result-er-optimal">3. Result Evidence Retrieval @Optimal (Result ER @Optimal)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-5-result-er-5">4. Result Evidence Retrieval @5 (Result ER @5)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-unconstrained-result-er-unconstrained">5. Result Evidence Retrieval Unconstrained (Result ER Unconstrained)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-description">Dataset Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -373,8 +398,100 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="evaluation-metric-explanations">
-<h1>Evaluation Metric Explanations<a class="headerlink" href="#evaluation-metric-explanations" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="evaluation-metrics-task-definition">
+<h1>Evaluation Metrics &amp; Task Definition<a class="headerlink" href="#evaluation-metrics-task-definition" title="Link to this heading">#</a></h1>
+<section id="evaluation-metrics">
+<h2>Evaluation Metrics<a class="headerlink" href="#evaluation-metrics" title="Link to this heading">#</a></h2>
+<section id="aspect-recall-k">
+<h3>Aspect Recall &#64;K<a class="headerlink" href="#aspect-recall-k" title="Link to this heading">#</a></h3>
+<p>Aspect Recall &#64;K measures the fraction of study aspects covered by a set of K retrieved sentences. Let {s1, …, sk} be the set of retrieved sentences and {f1, …, fm} be the set of study aspects in the evidence set. Aspect Recall &#64;K is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Aspect Recall &#64;K} = \frac{1}{m} \sum_{f_j} \mathbf{1} \left( \sum_{s_i} S(s_i, f_j) \geq 1 \right)
+\]</div>
+<p>This metric evaluates how well the retrieved sentences cover the relevant study aspects.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Aspect Recall &#64;K is crucial for determining the effectiveness of evidence retrieval systems in covering important aspects of a study.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="task-definitions">
+<h2>Task Definitions<a class="headerlink" href="#task-definitions" title="Link to this heading">#</a></h2>
+<section id="evidence-retrieval-optimal-er-optimal">
+<h3>1. Evidence Retrieval &#64;Optimal (ER &#64;optimal)<a class="headerlink" href="#evidence-retrieval-optimal-er-optimal" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Description:</strong> Retrieve the smallest number of sentences needed to cover all study aspects.</p></li>
+<li><p><strong>Goal:</strong> Form the best evidence set for or against a hypothesis with no more than the optimal number of sentences.</p></li>
+</ul>
+</section>
+<section id="evidence-retrieval-10-er-10">
+<h3>2. Evidence Retrieval &#64;10 (ER &#64;10)<a class="headerlink" href="#evidence-retrieval-10-er-10" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Description:</strong> Retrieve no more than 10 sentences to provide evidence for or against a hypothesis.</p></li>
+<li><p><strong>Goal:</strong> Achieve a maximum possible performance with a limited number of sentences.</p></li>
+</ul>
+</section>
+<section id="result-evidence-retrieval-optimal-result-er-optimal">
+<h3>3. Result Evidence Retrieval &#64;Optimal (Result ER &#64;Optimal)<a class="headerlink" href="#result-evidence-retrieval-optimal-result-er-optimal" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Description:</strong> Retrieve the optimal number of sentences covering study aspects labeled as “Results”.</p></li>
+<li><p><strong>Goal:</strong> Focus on retrieving sentences related to results only.</p></li>
+</ul>
+</section>
+<section id="result-evidence-retrieval-5-result-er-5">
+<h3>4. Result Evidence Retrieval &#64;5 (Result ER &#64;5)<a class="headerlink" href="#result-evidence-retrieval-5-result-er-5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Description:</strong> Retrieve no more than 5 sentences related to results.</p></li>
+<li><p><strong>Goal:</strong> Provide targeted evaluation with a limited number of sentences.</p></li>
+</ul>
+</section>
+<section id="result-evidence-retrieval-unconstrained-result-er-unconstrained">
+<h3>5. Result Evidence Retrieval Unconstrained (Result ER Unconstrained)<a class="headerlink" href="#result-evidence-retrieval-unconstrained-result-er-unconstrained" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Description:</strong> Retrieve any number of sentences deemed necessary.</p></li>
+<li><p><strong>Goal:</strong> Maximize coverage without a sentence limit.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Important:</strong> Each task evaluates different aspects of a model’s ability to retrieve relevant evidence from biomedical papers.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="dataset-description">
+<h2>Dataset Description<a class="headerlink" href="#dataset-description" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Dataset</strong></p></th>
+<th class="head"><p><strong>Candidate Tokens</strong></p></th>
+<th class="head"><p><strong>Sentences</strong></p></th>
+<th class="head"><p><strong>Study Aspects</strong></p></th>
+<th class="head"><p><strong>Optimal # Sentences</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Test Set</strong></p></td>
+<td><p>min: 1691, avg: 5578, max: 23980</p></td>
+<td><p>min: 48, avg: 168.1, max: 794</p></td>
+<td><p>min: 2, avg: 9.5, max: 36</p></td>
+<td><p>min: 1, avg: 4.6, max: 18</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Result Retrieval</strong></p></td>
+<td><p>min: 1691, avg: 5582, max: 23980</p></td>
+<td><p>min: 48, avg: 168.4, max: 794</p></td>
+<td><p>min: 1, avg: 4.2, max: 18</p></td>
+<td><p>min: 1, avg: 2.1, max: 7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Dataset Sources:</strong> The dataset comprises biomedical papers and survey monographs from the International Agency for Research on Cancer (IARC).</p></li>
+<li><p><strong>Train/Test Split:</strong> The dataset is split into training (96 instances), development (37 instances), and test sets (293 instances).</p></li>
+<li><p><strong>Annotation Process:</strong> Sentences in the papers are annotated to determine which provide evidence for the hypotheses, leveraging both expert judgments and automated tools.</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -431,6 +548,34 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics">Evaluation Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aspect-recall-k">Aspect Recall @K</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definitions">Task Definitions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-optimal-er-optimal">1. Evidence Retrieval @Optimal (ER @optimal)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-10-er-10">2. Evidence Retrieval @10 (ER @10)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-optimal-result-er-optimal">3. Result Evidence Retrieval @Optimal (Result ER @Optimal)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-5-result-er-5">4. Result Evidence Retrieval @5 (Result ER @5)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-unconstrained-result-er-unconstrained">5. Result Evidence Retrieval Unconstrained (Result ER Unconstrained)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-description">Dataset Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
