@@ -14,6 +14,18 @@ This metric evaluates how well the retrieved sentences cover the relevant study 
 
 > **Note:** Aspect Recall @K is crucial for determining the effectiveness of evidence retrieval systems in covering important aspects of a study.
 
+### Evaluation Strategies for LLMs
+
+We implement standard practices for evaluating LLMs on long-context benchmarks:
+
+- **Chain-of-Thought (CoT):** This is our default evaluation strategy, optimized from our development set.
+- **In-Context Learning (ICL):** From the development set, we randomly sample 8 example hypotheses and their corresponding ground-truth set of retrieved sentences, following standard ICL practices.
+- **Section-by-Section:** We divide a paper by its natural sections. In the first stage, the LLM retrieves sentences from each section one at a time. In the second stage, all retrieved sentences are presented to the LLM.
+- **Instruction-following Embedding Systems:** Recent large-scale embedding models are trained to follow various instructions. On the development set, we design a short instruction for embedding models to find important and representative details from a biomedical experiment relevant to the hypothesis.
+
+The query is formed by concatenating the hypothesis and instruction, and each sentence is independently embedded. Cosine-similarity is used to calculate the top K sentences.
+
+
 ## Task Definitions
 
 ### 1. Evidence Retrieval @Optimal (ER @optimal)
@@ -37,13 +49,6 @@ This metric evaluates how well the retrieved sentences cover the relevant study 
 - **Goal:** Maximize coverage without a sentence limit.
 
 > **Important:** Each task evaluates different aspects of a model's ability to retrieve relevant evidence from biomedical papers.
-
-## Dataset Description
-
-| **Dataset** | **Candidate Tokens** | **Sentences** | **Study Aspects** | **Optimal # Sentences** |
-|-------------|----------------------|---------------|--------------------|-------------------------|
-| **Test Set** | min: 1691, avg: 5578, max: 23980 | min: 48, avg: 168.1, max: 794 | min: 2, avg: 9.5, max: 36 | min: 1, avg: 4.6, max: 18 |
-| **Result Retrieval** | min: 1691, avg: 5582, max: 23980 | min: 48, avg: 168.4, max: 794 | min: 1, avg: 4.2, max: 18 | min: 1, avg: 2.1, max: 7 |
 
 ## Notes
 

@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'evaluation_metrics';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Example / Case Study" href="case_study.html" />
+    <link rel="next" title="Baseline Evaluation" href="baseline.html" />
     <link rel="prev" title="Links" href="links.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -176,6 +176,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="links.html">Links</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluation Metrics &amp; Task Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="baseline.html">Baseline Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="case_study.html">Example / Case Study</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_leaderboard.html">Model Leaderboard</a></li>
 </ul>
@@ -375,6 +376,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics">Evaluation Metrics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aspect-recall-k">Aspect Recall @K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-strategies-for-llms">Evaluation Strategies for LLMs</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definitions">Task Definitions</a><ul class="nav section-nav flex-column">
@@ -385,7 +387,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-unconstrained-result-er-unconstrained">5. Result Evidence Retrieval Unconstrained (Result ER Unconstrained)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-description">Dataset Description</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 </ul>
             </nav>
@@ -413,6 +414,17 @@ document.write(`
 <blockquote>
 <div><p><strong>Note:</strong> Aspect Recall &#64;K is crucial for determining the effectiveness of evidence retrieval systems in covering important aspects of a study.</p>
 </div></blockquote>
+</section>
+<section id="evaluation-strategies-for-llms">
+<h3>Evaluation Strategies for LLMs<a class="headerlink" href="#evaluation-strategies-for-llms" title="Link to this heading">#</a></h3>
+<p>We implement standard practices for evaluating LLMs on long-context benchmarks:</p>
+<ul class="simple">
+<li><p><strong>Chain-of-Thought (CoT):</strong> This is our default evaluation strategy, optimized from our development set.</p></li>
+<li><p><strong>In-Context Learning (ICL):</strong> From the development set, we randomly sample 8 example hypotheses and their corresponding ground-truth set of retrieved sentences, following standard ICL practices.</p></li>
+<li><p><strong>Section-by-Section:</strong> We divide a paper by its natural sections. In the first stage, the LLM retrieves sentences from each section one at a time. In the second stage, all retrieved sentences are presented to the LLM.</p></li>
+<li><p><strong>Instruction-following Embedding Systems:</strong> Recent large-scale embedding models are trained to follow various instructions. On the development set, we design a short instruction for embedding models to find important and representative details from a biomedical experiment relevant to the hypothesis.</p></li>
+</ul>
+<p>The query is formed by concatenating the hypothesis and instruction, and each sentence is independently embedded. Cosine-similarity is used to calculate the top K sentences.</p>
 </section>
 </section>
 <section id="task-definitions">
@@ -455,34 +467,6 @@ document.write(`
 <div><p><strong>Important:</strong> Each task evaluates different aspects of a model’s ability to retrieve relevant evidence from biomedical papers.</p>
 </div></blockquote>
 </section>
-</section>
-<section id="dataset-description">
-<h2>Dataset Description<a class="headerlink" href="#dataset-description" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p><strong>Dataset</strong></p></th>
-<th class="head"><p><strong>Candidate Tokens</strong></p></th>
-<th class="head"><p><strong>Sentences</strong></p></th>
-<th class="head"><p><strong>Study Aspects</strong></p></th>
-<th class="head"><p><strong>Optimal # Sentences</strong></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Test Set</strong></p></td>
-<td><p>min: 1691, avg: 5578, max: 23980</p></td>
-<td><p>min: 48, avg: 168.1, max: 794</p></td>
-<td><p>min: 2, avg: 9.5, max: 36</p></td>
-<td><p>min: 1, avg: 4.6, max: 18</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Result Retrieval</strong></p></td>
-<td><p>min: 1691, avg: 5582, max: 23980</p></td>
-<td><p>min: 48, avg: 168.4, max: 794</p></td>
-<td><p>min: 1, avg: 4.2, max: 18</p></td>
-<td><p>min: 1, avg: 2.1, max: 7</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 </section>
 <section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
@@ -534,11 +518,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="case_study.html"
+       href="baseline.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Example / Case Study</p>
+        <p class="prev-next-title">Baseline Evaluation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -560,6 +544,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics">Evaluation Metrics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aspect-recall-k">Aspect Recall @K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-strategies-for-llms">Evaluation Strategies for LLMs</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definitions">Task Definitions</a><ul class="nav section-nav flex-column">
@@ -570,7 +555,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-unconstrained-result-er-unconstrained">5. Result Evidence Retrieval Unconstrained (Result ER Unconstrained)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-description">Dataset Description</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 </ul>
   </nav></div>
