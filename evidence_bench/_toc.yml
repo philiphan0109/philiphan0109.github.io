@@ -4,6 +4,7 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+  - file: links
+  - file: evaluation_metrics
+  - file: case_study
+  - file: model_leaderboard
