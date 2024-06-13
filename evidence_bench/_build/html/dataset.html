@@ -180,8 +180,6 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Dataset Structure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation_metrics.html">Evaluation Metrics &amp; Task Definition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="baseline.html">Baseline Evaluation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model_leaderboard.html">Model Leaderboard</a></li>
 </ul>
 
     </div>
@@ -381,6 +379,35 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="dataset-structure">
 <h1>Dataset Structure<a class="headerlink" href="#dataset-structure" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Evidence Bench’s train, dev, and test split all have the same structure.</p>
+</div>
+<p>Each data instance (stored in a JSON) has the following features:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hypothesis</span></code>: the biomedical hypothesis in string format</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paper_as_candidate_pool</span></code>: an ordered tuple of strings. Each string is one sentence from the paper. This is the candidate pool for all of the evidence retrieval tasks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aspect_list_ids</span></code>: a list of strings. Each string is an id for an aspect related to the study’s results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aspect2sentence_indices</span></code>: a dictionary that maps from each aspect to all sentence indices that are sources of information for that aspect.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sentence_index2aspects</span></code>: a dictionary that maps from each sentence index to all aspects that this sentence is a source of information for.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evidence_retrieval_at_optimal_evaluation</span></code>: A dictionary that contains informa- tion for evaluating a model’s performance on the task Evidence Retrieval &#64;Optimal.</p>
+<ul>
+<li><p><strong>optimal</strong>: A positive integer, which is the smallest number of sentences needed to cover all study aspects.</p></li>
+<li><p><strong>one_selection_of_sentences</strong>: a list of sentence indices, containing the smallest number of sentences needed to cover all aspects. Note, there are potentially other lists of sentences of the same size which cover all aspects.</p></li>
+<li><p><strong>covered_aspects</strong>: the list of aspects that are covered, which is all aspects in this case.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evidence_retrieval_at_10_evaluation</span></code>: A dictionary that contains information for evaluating a model’s performance on the task Evidence Retrieval &#64;10.</p>
+<ul>
+<li><p><strong>one_selection_of_sentences</strong>: a list of 10 sentence indices. This list covers the maximum number of aspects which can be covered by 10 sentences.</p></li>
+<li><p><strong>covered_aspects</strong>: the list of aspects that are covered, which may be fewer than all aspects.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">results_evidence_retrieval_at_optimal_evaluation</span></code>: A dictionary that contains the information for evaluating a model’s performance on the task Results Evidence Retrieval &#64;Optimal. The structure is similar to evidence_retrieval_at_optimal_evaluation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">results_evidence_retrieval_at_5_evaluation</span></code>: A dictionary that contains the nec- essary information for evaluating a model’s performance on the task Results Evidence Retrieval &#64;5. The structure is similar to evidence_retrieval_at_10_evaluation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sentence_types_in_candidate_pool</span></code>: a tuple of strings. Each string is a sentence type. There are three possible sentence types: <strong>section_name</strong>, <strong>abstract</strong>, and <strong>normal_paragraph</strong>. For example, if the third string is ’abstract’, that means the third sentence comes from the abstract.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paper_id</span></code>: the id of the paper used as the candidate pool.</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
