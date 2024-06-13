@@ -380,7 +380,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract">Abstract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-formulation">Task Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Definitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-k">Evidence Retrieval @ K</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -395,19 +399,29 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="evidence-bench">
 <h1>Evidence Bench<a class="headerlink" href="#evidence-bench" title="Link to this heading">#</a></h1>
 <p><a class="reference external" href="https://link_to_your_paper"><img alt="EvidenceBench Paper" src="https://img.shields.io/badge/Paper-NeurIPS-blue.svg?logo=read-the-docs&amp;logoColor=white" /></a> <a class="reference external" href="https://lei.ucsd.edu/"><img alt="LEI Lab" src="https://img.shields.io/badge/Lab%20Group-LEI%20Lab-blue.svg?logo=teams&amp;logoColor=white" /></a> <a class="reference external" href="https://github.com/EvidenceBench/EvidenceBench"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-EvidenceBench-blue.svg?logo=github&amp;logoColor=white" /></a></p>
-<section id="abstract">
-<h2>Abstract<a class="headerlink" href="#abstract" title="Link to this heading">#</a></h2>
+<section id="task-formulation">
+<h2>Task Formulation<a class="headerlink" href="#task-formulation" title="Link to this heading">#</a></h2>
 <p>We develop a pipeline for high-quality, sentence-by-sentence annotation of biomedical papers to find evidence for hypotheses. The pipeline, validated by human annotators, is used to evaluate various language models and retrieval systems on a benchmark of over 400 papers and 700k sentence judgments. Despite improvements, the best models still fall short of expert-level performance. This work aims to support the development of tools for automated evidence synthesis and hypothesis testing.</p>
-<p>Check out the content pages bundled with this book to see more.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="evaluation_metrics.html">Evaluation Metrics &amp; Task Definition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="baseline.html">Baseline Evaluation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="case_study.html">Example / Case Study</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model_leaderboard.html">Model Leaderboard</a></li>
-</ul>
-</div>
+<p>The EvidenceBench benchmark aims at identifying the most important pieces of information for or against a hypothesis within a paper. This sentence retrieval task is to retrieve the sentences which provide this evidence.</p>
+<section id="definitions">
+<h3>Definitions<a class="headerlink" href="#definitions" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Candidate</span> <span class="pre">Pool</span></code> The full paper is presented as a list of sentences. This list of sentences is the Candidate Pool.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Study</span> <span class="pre">Aspect</span></code> A study aspect is a single piece of information described in a paper. This could be an experimental outcome or a detail from study design.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Source</span> <span class="pre">of</span> <span class="pre">Information</span></code> A sentence is a paper is considered a source of information for a study aspect if it satisfies the following two criteria:</p>
+<ol class="arabic simple">
+<li><p>The content of the sentence implies most of the study aspect.</p></li>
+<li><p>For any part of the study aspect that the sentence does not imply, the information must be deducible from the surrounding context.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">Hypothesis</span></code> A hypothesis is a scientific generalization, expressible in one sentence. It should not be specific to one experiement.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Evidence</span> <span class="pre">Set</span></code> The evidence set is the set of study aspects which provides evidence for or against a hypothesis. We use papers and the sentences in them to curate the evidence set.</p>
 </section>
+<section id="evidence-retrieval-k">
+<h3>Evidence Retrieval &#64; K<a class="headerlink" href="#evidence-retrieval-k" title="Link to this heading">#</a></h3>
+<p>Our primary task is Evidence Retrieval &#64; K (<code class="docutils literal notranslate"><span class="pre">ER</span> <span class="pre">&#64;</span> <span class="pre">K</span></code>)</p>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -465,7 +479,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract">Abstract</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-formulation">Task Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Definitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-k">Evidence Retrieval @ K</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
