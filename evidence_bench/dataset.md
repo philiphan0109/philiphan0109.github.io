@@ -6,6 +6,7 @@
 Each data instance (stored in a JSON) has the following features:
 
 - ```hypothesis```: the biomedical hypothesis in string format
+- ```paper_as_candidate_pool```: an ordered tuple of strings. Each string is one sentence from the paper. This is the candidate pool for all of the evidence retrieval tasks.
 - ```aspect_list_ids```: a list of strings. Each string is an id for an aspect related to the study's results.
 - ```aspect2sentence_indices```: a dictionary that maps from each aspect to all sentence indices that are sources of information for that aspect.
 - ```sentence_index2aspects```: a dictionary that maps from each sentence index to all aspects that this sentence is a source of information for.
