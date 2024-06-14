@@ -6,4 +6,4 @@ root: intro
 chapters:
   - file: task_formulation
   - file: dataset
-  - file: evaluation_metrics 
+  - file: evaluation_metrics

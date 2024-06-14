@@ -15,7 +15,7 @@ Welcome to **EvidenceBench**! Our goal is to provide a robust benchmark for eval
 
 Imagine a scenario where researchers are trying to confirm whether a chemical found in traditional Chinese herbal medicines, Aristolochic Acid (AA), causes kidney cancer. Twenty years ago, this causal relationship was still under investigation. To prove this hypothesis, scientists need to find specific pieces of evidence within a vast number of research papers.
 
-The IARC-Style Summary provides a concise overview of key findings from the study, highlighting the most important results. The Hypothesis is the central question the researchers are trying to answer, in this case, whether AA-induced DNA mutations cause kidney cancer.
+The **IARC-Style Summary** provides a concise overview of key findings from the study, highlighting the most important results. The **Hypothesis** is the central question the researchers are trying to answer, in this case, whether AA-induced DNA mutations cause kidney cancer.
 
 **IARC-Style Summary**: Results from Hoang et al. (2016) showed that a cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC with an odds ratio (OR) of 1.25. A distinctive AA mutational signature was evident in 6/10 sequenced ccRCC exomes from AA-exposed patients. Among these tumors, VHL, the most frequently mutated gene, mutated in 7 out of 10 samples.
 
@@ -38,7 +38,7 @@ To validate this hypothesis, EvidenceBench breaks down the study's findings and 
 4. **VHL Mutation Prevalence**: VHL was mutated in 7 out of 10 tumors in the study.
     - "VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2)." (Sentence 106)
 
-**Selected Sentences from Full Paper**: The system pinpoints the following key sentences from the paper and is compared to the breakdown of the study findings, saving time and ensuring accuracy in gathering evidence.
+**Selected Sentences from Full Paper**: The system being evaluated pinpoints the following key sentences from the paper and is compared to the breakdown of the study findings, saving time and ensuring accuracy in gathering evidence.
 
 - Sentence 9: Cumulative ingestion of more than 250 mg of AA increased risk of ccRCC (OR, 1.25), and we detected dA-AL-I adducts in 76% of Taiwanese ccRCC patients.
 
