@@ -18,7 +18,7 @@ A fully-rendered HTML version of the book will be built in `evidence_bench/_buil
 
 ### Hosting the book
 
-NOTE: This has already been setup for the EvidenceBench website, all that needs to be done after editing the page, is to push to the main branch, which will start a Github Action (around 1 minute or so). After that action has been completed, the page should be updated.
+**NOTE: This has already been setup for the EvidenceBench website, all that needs to be done after editing the page, is to push to the main branch, which will start a Github Action (around 1 minute or so). After that action has been completed, the page should be updated.**
 
 Please see the [Jupyter Book documentation](https://jupyterbook.org/publish/web.html) to discover options for deploying a book online using services such as GitHub, GitLab, or Netlify.
 
