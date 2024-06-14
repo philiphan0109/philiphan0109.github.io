@@ -18,9 +18,19 @@ A fully-rendered HTML version of the book will be built in `evidence_bench/_buil
 
 ### Hosting the book
 
+NOTE: This has already been setup for the EvidenceBench website, all that needs to be done after editing the page, is to push to the main branch, which will start a Github Action (around 1 minute or so). After that action has been completed, the page should be updated.
+
 Please see the [Jupyter Book documentation](https://jupyterbook.org/publish/web.html) to discover options for deploying a book online using services such as GitHub, GitLab, or Netlify.
 
 For GitHub and GitLab deployment specifically, the [cookiecutter-jupyter-book](https://github.com/executablebooks/cookiecutter-jupyter-book) includes templates for, and information about, optional continuous integration (CI) workflow files to help easily and automatically deploy books online with GitHub or GitLab. For example, if you chose `github` for the `include_ci` cookiecutter option, your book template was created with a GitHub actions workflow file that, once pushed to GitHub, automatically renders and pushes your book to the `gh-pages` branch of your repo and hosts it on GitHub Pages when a push or pull request is made to the main branch.
+
+### Additional Info
+
+- The `_toc.yml` file is how the page is structured, the list in that file is the table of contents that is displayed on the navbar on the left of the page.
+
+- To make a new page, make a new markdown file, and add a new file to the table of contents.
+
+- To view changes without pushing to github, you can build the book on your local machine using the `clean` and `build` commands under `jupyter-book`. If the cleaning step is skipped, it can cause buggy behavior.
 
 ## Contributors
 
