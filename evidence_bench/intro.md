@@ -11,7 +11,7 @@ Welcome to **EvidenceBench**! Our goal is to provide a robust benchmark for eval
 
 <p style="text-align: center; font-size: smaller; line-height: 1.2;">Figure 1: In EvidenceBench, a model sees a Hypothesis, and the full sequence of sentences from a paper as Candidate Pool. The model selects S9, S69, and S106 as the set of retrieved sentences. However, these 3 sentences only cover Aspect 1, 3, and 4, since S6 and S69 are redundant and cover the same Aspect 1. Aspect 3 is missed, resulting in 75% Aspect Recall.</p>
 
-### An Example
+## An Example
 
 Imagine a scenario where researchers are trying to confirm whether a chemical found in traditional Chinese herbal medicines, Aristolochic Acid (AA), causes kidney cancer. Twenty years ago, this causal relationship was still under investigation. To prove this hypothesis, scientists need to find specific pieces of evidence within a vast number of research papers.
 
