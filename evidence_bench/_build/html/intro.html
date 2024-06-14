@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Dataset Structure" href="dataset.html" />
+    <link rel="next" title="Task Formulation" href="task_formulation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,6 +181,7 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="task_formulation.html">Task Formulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataset.html">Dataset Structure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="evaluation_metrics.html">Evaluation Metrics &amp; Task Definition</a></li>
 </ul>
@@ -378,9 +379,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-formulation">Task Formulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Definitions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-k">Evidence Retrieval @ K</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An Example</a></li>
 </ul>
 </li>
@@ -397,44 +396,44 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="evidence-bench">
 <h1>Evidence Bench<a class="headerlink" href="#evidence-bench" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://link_to_your_paper"><img alt="EvidenceBench Paper" src="https://img.shields.io/badge/Paper-NeurIPS-blue.svg?logo=read-the-docs&amp;logoColor=white" /></a> <a class="reference external" href="https://lei.ucsd.edu/"><img alt="LEI Lab" src="https://img.shields.io/badge/Lab%20Group-LEI%20Lab-blue.svg?logo=teams&amp;logoColor=white" /></a> <a class="reference external" href="https://github.com/EvidenceBench/EvidenceBench"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-EvidenceBench-blue.svg?logo=github&amp;logoColor=white" /></a></p>
-<section id="task-formulation">
-<h2>Task Formulation<a class="headerlink" href="#task-formulation" title="Link to this heading">#</a></h2>
-<p>We created a pipeline for high-quality, sentence-by-sentence annotation of biomedical papers to find evidence for hypotheses. The pipeline, validated by human annotators, is used to evaluate various language models and retrieval systems on a benchmark of over 400 papers and 700k sentence judgments. Despite improvements, the best models still fall short of expert-level performance. This work aims to support the development of tools for automated evidence synthesis and hypothesis testing.</p>
-<p>The <em><strong>EvidenceBench</strong></em> benchmark aims at identifying the most important pieces of information for or against a hypothesis within a paper. This sentence retrieval task is to retrieve the sentences which provide this evidence.</p>
-<section id="definitions">
-<h3>Definitions<a class="headerlink" href="#definitions" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">Candidate</span> <span class="pre">Pool</span></code> The full paper is presented as a list of sentences. This list of sentences is the Candidate Pool.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Study</span> <span class="pre">Aspect</span></code> A study aspect is a single piece of information described in a paper. This could be an experimental outcome or a detail from study design.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Source</span> <span class="pre">of</span> <span class="pre">Information</span></code> A sentence is a paper is considered a source of information for a study aspect if it satisfies the following two criteria:</p>
-<ol class="arabic simple">
-<li><p>The content of the sentence implies most of the study aspect.</p></li>
-<li><p>For any part of the study aspect that the sentence does not imply, the information must be deducible from the surrounding context.</p></li>
-</ol>
-<p><code class="docutils literal notranslate"><span class="pre">Hypothesis</span></code> A hypothesis is a scientific generalization, expressible in one sentence. It should not be specific to one experiement.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Evidence</span> <span class="pre">Set</span></code> The evidence set is the set of study aspects which provides evidence for or against a hypothesis. We use papers and the sentences in them to curate the evidence set.</p>
-</section>
-<section id="evidence-retrieval-k">
-<h3>Evidence Retrieval &#64; K<a class="headerlink" href="#evidence-retrieval-k" title="Link to this heading">#</a></h3>
-<p>Our primary task is Evidence Retrieval &#64; K (<code class="docutils literal notranslate"><span class="pre">ER</span> <span class="pre">&#64;</span> <span class="pre">K</span></code>) - to find the k sentences from the candidate pool (paper) which provide evidence for or against the hypothesis. The retrieved sentences are then evaluated against the evidence set, which contains the ground-truth study aspects that provide evidence for or against the hypothesis.</p>
-<p>The goal is for the retrieved sentences to be sources of information for study aspects in the evidence set. The system does not have access to the evidence set, it is only for evaluation.</p>
-<p>The second version of a task is that only study aspects delated to the results and analyses are considered. Those related to background and methodolody are omitted from the evidence set. This is <code class="docutils literal notranslate"><span class="pre">Result-ER</span> <span class="pre">&#64;</span> <span class="pre">K</span></code> and it provides a more targeted evaluation of the system’s ability to identify the most important evidence.</p>
-</section>
+<p><a class="reference external" href="https://link_to_your_paper"><img alt="EvidenceBench Paper" src="https://img.shields.io/badge/Paper-blue.svg?logo=read-the-docs&amp;logoColor=white" /></a> <a class="reference external" href="https://lei.ucsd.edu/"><img alt="LEI Lab" src="https://img.shields.io/badge/Lab%20Group-LEI%20Lab-blue.svg?logo=teams&amp;logoColor=white" /></a> <a class="reference external" href="https://github.com/EvidenceBench/EvidenceBench"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-EvidenceBench-blue.svg?logo=github&amp;logoColor=white" /></a></p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Welcome to <strong>EvidenceBench</strong>! Our goal is to provide a robust benchmark for evaluating language models on their ability to retrieve evidence supporting or refuting scientific hypotheses from biomedical papers. Our pipeline involves high-quality, sentence-by-sentence annotations, validated by human experts, across over 400 papers and 700k sentence judgments. This work supports the development of automated tools for evidence synthesis and hypothesis testing in the biomedical domain.</p>
+<p><img alt="Figure 1" src="_images/fig1.png" /></p>
+<p style="text-align: center; font-size: smaller; line-height: 1.2;">Figure 1: In EvidenceBench, a model sees a Hypothesis, and the full sequence of sentences from a paper as Candidate Pool. The model selects S9, S69, and S106 as the set of retrieved sentences. However, these 3 sentences only cover Aspect 1, 3, and 4, since S6 and S69 are redundant and cover the same Aspect 1. Aspect 3 is missed, resulting in 75% Aspect Recall.</p>
 <section id="an-example">
 <h3>An Example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h3>
-<p>Aristolochic Acid (AA) is a toxin that is naturally occurring in traditional Chinese herbal medicines and has been known to cause many types of cancer in animals and humans. However, 20 years ago, the causal relationship between AA and kidney cancer was not yet confirmed. In this section, we present an example data instance related to AA.</p>
+<p>Imagine a scenario where researchers are trying to confirm whether a chemical found in traditional Chinese herbal medicines, Aristolochic Acid (AA), causes kidney cancer. Twenty years ago, this causal relationship was still under investigation. To prove this hypothesis, scientists need to find specific pieces of evidence within a vast number of research papers.</p>
+<p>The IARC-Style Summary provides a concise overview of key findings from the study, highlighting the most important results. The Hypothesis is the central question the researchers are trying to answer, in this case, whether AA-induced DNA mutations cause kidney cancer.</p>
+<p><strong>IARC-Style Summary</strong>: Results from Hoang et al. (2016) showed that a cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC with an odds ratio (OR) of 1.25. A distinctive AA mutational signature was evident in 6/10 sequenced ccRCC exomes from AA-exposed patients. Among these tumors, VHL, the most frequently mutated gene, mutated in 7 out of 10 samples.</p>
 <p><strong>Hypothesis</strong>: Aristolochic Acid (AA) induced DNA mutation is causal for renal carcinoma (RCC).</p>
-<p><strong>IARC-Style Summary</strong>: Results from Hoang et al. (2016)[15] showed that a cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC with an odds ratio (OR) of 1.25. A distinctive AA mutational signature was evident in 6/10 sequenced ccRCC exomes from AA-exposed patients. Among these tumors, VHL, the most frequently mutated gene, mutated in 7 out of 10 samples.</p>
-<p><strong>Study Aspect Decomposition</strong>:</p>
+<p>To validate this hypothesis, EvidenceBench breaks down the study’s findings and gather relevant sentences that support each aspect of the hypothesis.</p>
+<p><strong>Break Down of Study Findings</strong>:</p>
 <ol class="arabic simple">
-<li><p>Cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC (OR, 1.25). [Sentences 9 and 69 are sources of information for Aspect 1].</p></li>
-<li><p>A distinctive AA mutational signature was evident in six of the 10 sequenced ccRCC exomes from AA-exposed patients. [Sentence 163 is the source of information for Aspect 2]</p></li>
-<li><p>The most frequently mutated driver gene was VHL. [Sentence 106 is the source of informa- tion for Aspect 3].</p></li>
-<li><p>VHL was mutated in 7 out of 10 tumors. [Sentence 106 is the source of information for Aspect 4]</p></li>
+<li><p><strong>Increased Risk of ccRCC</strong>: The study found that consuming more than 250 mg of AA increases the risk of ccRCC, with an odds ratio (OR) of 1.25.</p>
+<ul class="simple">
+<li><p>“Cumulative ingestion of more than 250 mg of AA increased risk of ccRCC (OR, 1.25), and we detected dA-AL-I adducts in 76% of Taiwanese ccRCC patients.” (Sentence 9)</p></li>
+<li><p>“The results (Table 1) indicate an adjusted OR of 1.25 (1.004–1.547) for ccRCC in persons consuming more than 250 mg of AA during the period of 1997 to 2003.” (Sentence 69)</p></li>
+</ul>
+</li>
+<li><p><strong>AA Mutational Signature</strong>: A unique mutation pattern caused by AA was found in 6 out of 10 ccRCC patients.</p>
+<ul class="simple">
+<li><p>“Whole-exome sequencing confirmed that the AA mutational signature was present in 6 of 10 ccRCC patients studied.” (Sentence 163)</p></li>
+</ul>
+</li>
+<li><p><strong>Frequent Mutation of VHL Gene</strong>: The gene VHL was the most frequently mutated in these cancer cases.</p>
+<ul class="simple">
+<li><p>“VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2).” (Sentence 106)</p></li>
+</ul>
+</li>
+<li><p><strong>VHL Mutation Prevalence</strong>: VHL was mutated in 7 out of 10 tumors in the study.</p>
+<ul class="simple">
+<li><p>“VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2).” (Sentence 106)</p></li>
+</ul>
+</li>
 </ol>
-<p><strong>Study Aspect Decomposition</strong>:</p>
-<p>All 216 sentences from Hoang et al. are indexed, starting from 0 to 215. For brevity, we will not reproduce the entire paper here. Figure 1 shows sentences 9, 69, 106 from the full list of sentences are retrieved by a model.</p>
-<p><strong>Selected Sentences from Full Paper</strong>:</p>
+<p><strong>Selected Sentences from Full Paper</strong>: The system pinpoints the following key sentences from the paper and is compared to the breakdown of the study findings, saving time and ensuring accuracy in gathering evidence.</p>
 <ul class="simple">
 <li><p>Sentence 9: Cumulative ingestion of more than 250 mg of AA increased risk of ccRCC (OR, 1.25), and we detected dA-AL-I adducts in 76% of Taiwanese ccRCC patients.</p></li>
 <li><p>Sentence 69: The results (Table 1) indicate an adjusted OR of 1.25 (1.004–1.547) for ccRCC in persons consuming more than 250 mg of AA during the period of 1997 to 2003.</p></li>
@@ -478,11 +477,11 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="dataset.html"
+       href="task_formulation.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Dataset Structure</p>
+        <p class="prev-next-title">Task Formulation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -502,9 +501,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-formulation">Task Formulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">Definitions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-k">Evidence Retrieval @ K</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An Example</a></li>
 </ul>
 </li>
