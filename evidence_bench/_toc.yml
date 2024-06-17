@@ -4,6 +4,7 @@
 format: jb-book
 root: intro
 chapters:
+  - file: example
   - file: task_formulation
   - file: dataset
   - file: evaluation_metrics
