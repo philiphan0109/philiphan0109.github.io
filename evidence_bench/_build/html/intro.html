@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -399,16 +399,17 @@ document.write(`
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>Welcome to <strong>EvidenceBench</strong>! Our goal is to provide a robust benchmark for evaluating language models on their ability to retrieve evidence supporting or refuting scientific hypotheses from biomedical papers. Our pipeline involves high-quality, sentence-by-sentence annotations, validated by human experts, across over 400 papers and 700k sentence judgments. This work supports the development of automated tools for evidence synthesis and hypothesis testing in the biomedical domain.</p>
 <p><img alt="Figure 1" src="_images/fig1.png" /></p>
-<p style="text-align: center; font-size: smaller; line-height: 1.2;">Figure 1: In EvidenceBench, a model sees a Hypothesis, and the full sequence of sentences from a paper as Candidate Pool. The model selects S9, S69, and S106 as the set of retrieved sentences. However, these 3 sentences only cover Aspect 1, 3, and 4, since S6 and S69 are redundant and cover the same Aspect 1. Aspect 3 is missed, resulting in 75% Aspect Recall.</p>
+<p style="text-align: center; font-size: smaller; line-height: 1.2;">Figure 1: In EvidenceBench, a model sees a hypothesis, and the full sequence of sentences from a paper as a candidate pool. The goal is to select sentences that provide evidence for or against the hypothesis. The retrieved sentences are compared to ground-truth study aspects, collected from literature surveys, which identify relevant evidence from the paper. In this case, the model selects S9, S69, and S106 as the set of retrieved sentences. However, these 3 sentences only cover study aspects 1, 3, and 4. Aspect 3 is missed, resulting in 75% Aspect Recall.</p>
 </section>
 <section id="an-example">
 <h2>An Example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h2>
-<p>Imagine a scenario where researchers are trying to confirm whether a chemical found in traditional Chinese herbal medicines, Aristolochic Acid (AA), causes kidney cancer. Twenty years ago, this causal relationship was still under investigation. To prove this hypothesis, scientists need to find specific pieces of evidence within a vast number of research papers.</p>
-<p>The <strong>IARC-Style Summary</strong> provides a concise overview of key findings from the study, highlighting the most important results. The <strong>Hypothesis</strong> is the central question the researchers are trying to answer, in this case, whether AA-induced DNA mutations cause kidney cancer.</p>
-<p><strong>IARC-Style Summary</strong>: Results from Hoang et al. (2016) showed that a cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC with an odds ratio (OR) of 1.25. A distinctive AA mutational signature was evident in 6/10 sequenced ccRCC exomes from AA-exposed patients. Among these tumors, VHL, the most frequently mutated gene, mutated in 7 out of 10 samples.</p>
+<p>Imagine a scenario where researchers are trying to determine whether a chemical found in traditional Chinese herbal medicines, Aristolochic Acid (AA), causes kidney cancer. Twenty years ago, this causal relationship was still under investigation. The evidence for this relationship is now spread across a vast research literature.</p>
+<p>EvidenceBench presents the task of extracting evidence for or against a hypothesis from a specific paper. In this example, the task is to identify evidence from the paper <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5533284/">Hoang et al. (2016)</a>.</p>
+<p>The <strong>Survey Summary</strong> provides a ground-truth description of the relevant evidence. It is extracted from a survey article on Aristolochic Acid, and gives a concise overview of key findings from Hoang et al. (2016). The <strong>Hypothesis</strong> is the central question the researchers are trying to answer, in this case, whether AA-induced DNA mutations cause kidney cancer.</p>
+<p><strong>Survey Summary</strong>: Results from Hoang et al. (2016) showed that a cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC with an odds ratio (OR) of 1.25. A distinctive AA mutational signature was evident in 6/10 sequenced ccRCC exomes from AA-exposed patients. Among these tumors, VHL, the most frequently mutated gene, mutated in 7 out of 10 samples.</p>
 <p><strong>Hypothesis</strong>: Aristolochic Acid (AA) induced DNA mutation is causal for renal carcinoma (RCC).</p>
-<p>To validate this hypothesis, EvidenceBench breaks down the study’s findings and gather relevant sentences that support each aspect of the hypothesis.</p>
-<p><strong>Break Down of Study Findings</strong>:</p>
+<p>EvidenceBench breaks the Survey Summary into Study Aspects, and then compares these aspects to each sentence in Hoang et al. (2016), generating per-sentence annotations for the paper.</p>
+<p><strong>Study Aspects</strong> (generated from Survey Summary):</p>
 <ol class="arabic simple">
 <li><p><strong>Increased Risk of ccRCC</strong>: The study found that consuming more than 250 mg of AA increases the risk of ccRCC, with an odds ratio (OR) of 1.25.</p>
 <ul class="simple">
@@ -432,12 +433,12 @@ document.write(`
 </ul>
 </li>
 </ol>
-<p><strong>Selected Sentences from Full Paper</strong>: The system being evaluated pinpoints the following key sentences from the paper and is compared to the breakdown of the study findings, saving time and ensuring accuracy in gathering evidence.</p>
+<p><strong>Selected Sentences from Full Paper</strong>: The following sentences from Hoang et al. (2016) are sources of information for the Survey Summary. These sentences are annotated with their corresponding Study Aspects. The EvidenceBench task is to retrieve these sentences given the paper’s full-text.</p>
 <ul class="simple">
-<li><p>Sentence 9: Cumulative ingestion of more than 250 mg of AA increased risk of ccRCC (OR, 1.25), and we detected dA-AL-I adducts in 76% of Taiwanese ccRCC patients.</p></li>
-<li><p>Sentence 69: The results (Table 1) indicate an adjusted OR of 1.25 (1.004–1.547) for ccRCC in persons consuming more than 250 mg of AA during the period of 1997 to 2003.</p></li>
-<li><p>Sentence 106: VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2).</p></li>
-<li><p>Sentence 163: Whole-exome sequencing confirmed that the AA mutational signature was present in 6 of 10 ccRCC patients studied.</p></li>
+<li><p>Sentence 9: Cumulative ingestion of more than 250 mg of AA increased risk of ccRCC (OR, 1.25), and we detected dA-AL-I adducts in 76% of Taiwanese ccRCC patients. <em>Study Aspect 1</em></p></li>
+<li><p>Sentence 69: The results (Table 1) indicate an adjusted OR of 1.25 (1.004–1.547) for ccRCC in persons consuming more than 250 mg of AA during the period of 1997 to 2003. <em>Study Aspect 1</em></p></li>
+<li><p>Sentence 106: VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2). <em>Study Aspects 3 and 4</em></p></li>
+<li><p>Sentence 163: Whole-exome sequencing confirmed that the AA mutational signature was present in 6 of 10 ccRCC patients studied. <em>Study Aspect 2</em></p></li>
 </ul>
 </section>
 <div class="toctree-wrapper compound">
