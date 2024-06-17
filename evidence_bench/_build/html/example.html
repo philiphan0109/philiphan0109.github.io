@@ -377,7 +377,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survey-sumamry-hypothesis-extraction">Survey Sumamry &amp; Hypothesis Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidencebench-task-overview">EvidenceBench Task Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survey-summary-hypothesis-extraction">Survey Summary &amp; Hypothesis Extraction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#study-aspect-decomposition">Study Aspect Decomposition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-sentence-retrieval">System Sentence Retrieval</a></li>
 </ul>
@@ -393,50 +395,66 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="an-example">
 <h1>An Example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h1>
-<p>Imagine a scenario where researchers are trying to determine whether a chemical found in traditional Chinese herbal medicines, Aristolochic Acid (AA), causes kidney cancer. Twenty years ago, this causal relationship was still under investigation. The evidence for this relationship is now spread across a vast research literature.</p>
-<p>EvidenceBench presents the task of extracting evidence for or against a hypothesis from a specific paper. In this example, the task is to identify evidence from the paper <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5533284/">Hoang et al. (2016)</a>.</p>
-<section id="survey-sumamry-hypothesis-extraction">
-<h2>Survey Sumamry &amp; Hypothesis Extraction<a class="headerlink" href="#survey-sumamry-hypothesis-extraction" title="Link to this heading">#</a></h2>
-<p>The <strong>Survey Summary</strong> provides a ground-truth description of the relevant evidence. It is extracted from a survey article on Aristolochic Acid, and gives a concise overview of key findings from Hoang et al. (2016). The <strong>Hypothesis</strong> is the central question the researchers are trying to answer, in this case, whether AA-induced DNA mutations cause kidney cancer.</p>
-<p><strong>Survey Summary</strong>: Results from Hoang et al. (2016) showed that a cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC with an odds ratio (OR) of 1.25. A distinctive AA mutational signature was evident in 6/10 sequenced ccRCC exomes from AA-exposed patients. Among these tumors, VHL, the most frequently mutated gene, mutated in 7 out of 10 samples.</p>
-<p><strong>Hypothesis</strong>: Aristolochic Acid (AA) induced DNA mutation is causal for renal carcinoma (RCC).</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Imagine a scenario where researchers are investigating the link between Aristolochic Acid (AA), a compound found in traditional Chinese herbal medicines, and kidney cancer. This relationship, questioned two decades ago, now has its proof scattered across extensive research literature.</p>
+</section>
+<section id="evidencebench-task-overview">
+<h2>EvidenceBench Task Overview<a class="headerlink" href="#evidencebench-task-overview" title="Link to this heading">#</a></h2>
+<p>EvidenceBench facilitates the extraction of evidence supporting or contesting hypotheses from specific research papers. In this case, the focus is on <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5533284/">Hoang et al. (2016)</a>, which investigates the implications of AA on kidney cancer.</p>
+</section>
+<section id="survey-summary-hypothesis-extraction">
+<h2>Survey Summary &amp; Hypothesis Extraction<a class="headerlink" href="#survey-summary-hypothesis-extraction" title="Link to this heading">#</a></h2>
+<p><strong>Survey Summary</strong>:
+Extracted from a comprehensive survey on Aristolochic Acid, this summary encapsulates key findings from Hoang et al. (2016), highlighting that a cumulative ingestion of more than 250 mg of AA increases the risk of developing clear cell renal cell carcinoma (ccRCC) with an odds ratio (OR) of 1.25. Notably, a distinctive AA mutational signature was detected in the majority of the sequenced ccRCC exomes from patients exposed to AA. The VHL gene, crucial in many cell functions, was mutated in most cases studied.</p>
+<p><strong>Hypothesis</strong>:
+Does AA-induced DNA mutation cause renal carcinoma (RCC)?</p>
 </section>
 <section id="study-aspect-decomposition">
 <h2>Study Aspect Decomposition<a class="headerlink" href="#study-aspect-decomposition" title="Link to this heading">#</a></h2>
-<p>EvidenceBench breaks the Survey Summary into Study Aspects, and then compares these aspects to each sentence in Hoang et al. (2016), generating per-sentence annotations for the paper.</p>
-<p><strong>Study Aspects</strong> (generated from Survey Summary):</p>
+<p>EvidenceBench dissects the Survey Summary into specific Study Aspects and aligns them with sentences from Hoang et al. (2016), providing per-sentence annotations:</p>
 <ol class="arabic simple">
-<li><p><strong>Increased Risk of ccRCC</strong>: The study found that consuming more than 250 mg of AA increases the risk of ccRCC, with an odds ratio (OR) of 1.25.</p>
+<li><p><strong>Increased Risk of ccRCC</strong></p>
 <ul class="simple">
+<li><p>Cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC (OR, 1.25).</p></li>
+<li><p>Sentences reflecting this aspect:</p>
+<ul>
 <li><p>“Cumulative ingestion of more than 250 mg of AA increased risk of ccRCC (OR, 1.25), and we detected dA-AL-I adducts in 76% of Taiwanese ccRCC patients.” (Sentence 9)</p></li>
 <li><p>“The results (Table 1) indicate an adjusted OR of 1.25 (1.004–1.547) for ccRCC in persons consuming more than 250 mg of AA during the period of 1997 to 2003.” (Sentence 69)</p></li>
 </ul>
 </li>
-<li><p><strong>AA Mutational Signature</strong>: A unique mutation pattern caused by AA was found in 6 out of 10 ccRCC patients.</p>
+</ul>
+</li>
+<li><p><strong>AA Mutational Signature</strong></p>
 <ul class="simple">
+<li><p>A unique mutation pattern caused by AA was evident in the study.</p></li>
+<li><p>Sentences reflecting this aspect:</p>
+<ul>
 <li><p>“Whole-exome sequencing confirmed that the AA mutational signature was present in 6 of 10 ccRCC patients studied.” (Sentence 163)</p></li>
 </ul>
 </li>
-<li><p><strong>Frequent Mutation of VHL Gene</strong>: The gene VHL was the most frequently mutated in these cancer cases.</p>
+</ul>
+</li>
+<li><p><strong>Frequent Mutation of VHL Gene</strong></p>
 <ul class="simple">
+<li><p>The VHL gene mutation was a common occurrence in the patients studied.</p></li>
+<li><p>Sentences reflecting this aspect:</p>
+<ul>
 <li><p>“VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2).” (Sentence 106)</p></li>
 </ul>
 </li>
-<li><p><strong>VHL Mutation Prevalence</strong>: VHL was mutated in 7 out of 10 tumors in the study.</p>
-<ul class="simple">
-<li><p>“VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2).” (Sentence 106)</p></li>
 </ul>
 </li>
 </ol>
 </section>
 <section id="system-sentence-retrieval">
 <h2>System Sentence Retrieval<a class="headerlink" href="#system-sentence-retrieval" title="Link to this heading">#</a></h2>
-<p><strong>Selected Sentences from Full Paper</strong>: The following sentences from Hoang et al. (2016) are sources of information for the Survey Summary. These sentences are annotated with their corresponding Study Aspects. The EvidenceBench task is to retrieve these sentences given the paper’s full-text.</p>
+<p>EvidenceBench’s task is to retrieve sentences from the full text of Hoang et al. (2016) that are identified as carrying significant information about the Survey Summary. Here are the selected sentences, annotated with their corresponding Study Aspects:</p>
 <ul class="simple">
-<li><p>Sentence 9: Cumulative ingestion of more than 250 mg of AA increased risk of ccRCC (OR, 1.25), and we detected dA-AL-I adducts in 76% of Taiwanese ccRCC patients.</p></li>
-<li><p>Sentence 69: The results (Table 1) indicate an adjusted OR of 1.25 (1.004–1.547) for ccRCC in persons consuming more than 250 mg of AA during the period of 1997 to 2003.</p></li>
-<li><p>Sentence 106: VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2).</p></li>
-<li><p>Sentence 163: Whole-exome sequencing confirmed that the AA mutational signature was present in 6 of 10 ccRCC patients studied.</p></li>
+<li><p><strong>Sentence 9</strong>: Demonstrates the increased risk and presence of dA-AL-I adducts.</p></li>
+<li><p><strong>Sentence 69</strong>: Provides statistical evidence of the increased risk.</p></li>
+<li><p><strong>Sentence 106</strong>: Details the frequent mutation of the VHL gene.</p></li>
+<li><p><strong>Sentence 163</strong>: Confirms the presence of the AA mutational signature.</p></li>
 </ul>
 </section>
 </section>
@@ -505,7 +523,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survey-sumamry-hypothesis-extraction">Survey Sumamry &amp; Hypothesis Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidencebench-task-overview">EvidenceBench Task Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survey-summary-hypothesis-extraction">Survey Summary &amp; Hypothesis Extraction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#study-aspect-decomposition">Study Aspect Decomposition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-sentence-retrieval">System Sentence Retrieval</a></li>
 </ul>
