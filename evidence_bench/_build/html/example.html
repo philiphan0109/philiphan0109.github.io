@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Evaluation Metrics &amp; Task Definition &#8212; Evidence Bench</title>
+    <title>An Example &#8212; Evidence Bench</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
   
@@ -57,12 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'evaluation_metrics';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Dataset Structure" href="dataset.html" />
+    <link rel="next" title="Task Formulation" href="task_formulation.html" />
+    <link rel="prev" title="Evidence Bench" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,10 +178,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">An Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="task_formulation.html">Task Formulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dataset.html">Dataset Structure</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluation Metrics &amp; Task Definition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation_metrics.html">Evaluation Metrics &amp; Task Definition</a></li>
 </ul>
 
     </div>
@@ -254,7 +253,7 @@
       
       
       
-      <li><a href="https://github.com/philiphan0109/Evidence Bench/issues/new?title=Issue%20on%20page%20%2Fevaluation_metrics.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/philiphan0109/Evidence Bench/issues/new?title=Issue%20on%20page%20%2Fexample.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +283,7 @@
       
       
       
-      <li><a href="_sources/evaluation_metrics.md" target="_blank"
+      <li><a href="_sources/example.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -368,7 +367,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Evaluation Metrics & Task Definition</h1>
+    <h1>An Example</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -378,20 +377,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics">Evaluation Metrics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aspect-recall-k">Aspect Recall @K</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-strategies-for-llms">Evaluation Strategies for LLMs</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definitions">Task Definitions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-optimal-er-optimal">1. Evidence Retrieval @Optimal (ER @optimal)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-10-er-10">2. Evidence Retrieval @10 (ER @10)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-optimal-result-er-optimal">3. Result Evidence Retrieval @Optimal (Result ER @Optimal)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-5-result-er-5">4. Result Evidence Retrieval @5 (Result ER @5)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-unconstrained-result-er-unconstrained">5. Result Evidence Retrieval Unconstrained (Result ER Unconstrained)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survey-sumamry-hypothesis-extraction">Survey Sumamry &amp; Hypothesis Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#study-aspect-decomposition">Study Aspect Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-sentence-retrieval">System Sentence Retrieval</a></li>
 </ul>
             </nav>
         </div>
@@ -403,81 +391,52 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="evaluation-metrics-task-definition">
-<h1>Evaluation Metrics &amp; Task Definition<a class="headerlink" href="#evaluation-metrics-task-definition" title="Link to this heading">#</a></h1>
-<section id="evaluation-metrics">
-<h2>Evaluation Metrics<a class="headerlink" href="#evaluation-metrics" title="Link to this heading">#</a></h2>
-<section id="aspect-recall-k">
-<h3>Aspect Recall &#64;K<a class="headerlink" href="#aspect-recall-k" title="Link to this heading">#</a></h3>
-<p>Aspect Recall &#64;K measures the fraction of study aspects covered by a set of K retrieved sentences. Let {s1, …, sk} be the set of retrieved sentences and {f1, …, fm} be the set of study aspects in the evidence set. Aspect Recall &#64;K is defined as:</p>
-<div class="math notranslate nohighlight">
-\[
-\text{Aspect Recall &#64;K} = \frac{1}{m} \sum_{f_j} \mathbf{1} \left( \sum_{s_i} S(s_i, f_j) \geq 1 \right)
-\]</div>
-<p>This metric evaluates how well the retrieved sentences cover the relevant study aspects.</p>
-<blockquote>
-<div><p><strong>Note:</strong> Aspect Recall &#64;K is crucial for determining the effectiveness of evidence retrieval systems in covering important aspects of a study.</p>
-</div></blockquote>
+  <section class="tex2jax_ignore mathjax_ignore" id="an-example">
+<h1>An Example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h1>
+<p>Imagine a scenario where researchers are trying to determine whether a chemical found in traditional Chinese herbal medicines, Aristolochic Acid (AA), causes kidney cancer. Twenty years ago, this causal relationship was still under investigation. The evidence for this relationship is now spread across a vast research literature.</p>
+<p>EvidenceBench presents the task of extracting evidence for or against a hypothesis from a specific paper. In this example, the task is to identify evidence from the paper <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5533284/">Hoang et al. (2016)</a>.</p>
+<section id="survey-sumamry-hypothesis-extraction">
+<h2>Survey Sumamry &amp; Hypothesis Extraction<a class="headerlink" href="#survey-sumamry-hypothesis-extraction" title="Link to this heading">#</a></h2>
+<p>The <strong>Survey Summary</strong> provides a ground-truth description of the relevant evidence. It is extracted from a survey article on Aristolochic Acid, and gives a concise overview of key findings from Hoang et al. (2016). The <strong>Hypothesis</strong> is the central question the researchers are trying to answer, in this case, whether AA-induced DNA mutations cause kidney cancer.</p>
+<p><strong>Survey Summary</strong>: Results from Hoang et al. (2016) showed that a cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC with an odds ratio (OR) of 1.25. A distinctive AA mutational signature was evident in 6/10 sequenced ccRCC exomes from AA-exposed patients. Among these tumors, VHL, the most frequently mutated gene, mutated in 7 out of 10 samples.</p>
+<p><strong>Hypothesis</strong>: Aristolochic Acid (AA) induced DNA mutation is causal for renal carcinoma (RCC).</p>
 </section>
-<section id="evaluation-strategies-for-llms">
-<h3>Evaluation Strategies for LLMs<a class="headerlink" href="#evaluation-strategies-for-llms" title="Link to this heading">#</a></h3>
-<p>We implement standard practices for evaluating LLMs on long-context benchmarks:</p>
+<section id="study-aspect-decomposition">
+<h2>Study Aspect Decomposition<a class="headerlink" href="#study-aspect-decomposition" title="Link to this heading">#</a></h2>
+<p>EvidenceBench breaks the Survey Summary into Study Aspects, and then compares these aspects to each sentence in Hoang et al. (2016), generating per-sentence annotations for the paper.</p>
+<p><strong>Study Aspects</strong> (generated from Survey Summary):</p>
+<ol class="arabic simple">
+<li><p><strong>Increased Risk of ccRCC</strong>: The study found that consuming more than 250 mg of AA increases the risk of ccRCC, with an odds ratio (OR) of 1.25.</p>
 <ul class="simple">
-<li><p><strong>Chain-of-Thought (CoT):</strong> This is our default evaluation strategy, optimized from our development set.</p></li>
-<li><p><strong>In-Context Learning (ICL):</strong> From the development set, we randomly sample 8 example hypotheses and their corresponding ground-truth set of retrieved sentences, following standard ICL practices.</p></li>
-<li><p><strong>Section-by-Section:</strong> We divide a paper by its natural sections. In the first stage, the LLM retrieves sentences from each section one at a time. In the second stage, all retrieved sentences are presented to the LLM.</p></li>
-<li><p><strong>Instruction-following Embedding Systems:</strong> Recent large-scale embedding models are trained to follow various instructions. On the development set, we design a short instruction for embedding models to find important and representative details from a biomedical experiment relevant to the hypothesis.</p></li>
+<li><p>“Cumulative ingestion of more than 250 mg of AA increased risk of ccRCC (OR, 1.25), and we detected dA-AL-I adducts in 76% of Taiwanese ccRCC patients.” (Sentence 9)</p></li>
+<li><p>“The results (Table 1) indicate an adjusted OR of 1.25 (1.004–1.547) for ccRCC in persons consuming more than 250 mg of AA during the period of 1997 to 2003.” (Sentence 69)</p></li>
 </ul>
-<p>The query is formed by concatenating the hypothesis and instruction, and each sentence is independently embedded. Cosine-similarity is used to calculate the top K sentences.</p>
-</section>
-</section>
-<section id="task-definitions">
-<h2>Task Definitions<a class="headerlink" href="#task-definitions" title="Link to this heading">#</a></h2>
-<section id="evidence-retrieval-optimal-er-optimal">
-<h3>1. Evidence Retrieval &#64;Optimal (ER &#64;optimal)<a class="headerlink" href="#evidence-retrieval-optimal-er-optimal" title="Link to this heading">#</a></h3>
+</li>
+<li><p><strong>AA Mutational Signature</strong>: A unique mutation pattern caused by AA was found in 6 out of 10 ccRCC patients.</p>
 <ul class="simple">
-<li><p><strong>Description:</strong> Retrieve the smallest number of sentences needed to cover all study aspects.</p></li>
-<li><p><strong>Goal:</strong> Form the best evidence set for or against a hypothesis with no more than the optimal number of sentences.</p></li>
+<li><p>“Whole-exome sequencing confirmed that the AA mutational signature was present in 6 of 10 ccRCC patients studied.” (Sentence 163)</p></li>
 </ul>
-</section>
-<section id="evidence-retrieval-10-er-10">
-<h3>2. Evidence Retrieval &#64;10 (ER &#64;10)<a class="headerlink" href="#evidence-retrieval-10-er-10" title="Link to this heading">#</a></h3>
+</li>
+<li><p><strong>Frequent Mutation of VHL Gene</strong>: The gene VHL was the most frequently mutated in these cancer cases.</p>
 <ul class="simple">
-<li><p><strong>Description:</strong> Retrieve no more than 10 sentences to provide evidence for or against a hypothesis.</p></li>
-<li><p><strong>Goal:</strong> Achieve a maximum possible performance with a limited number of sentences.</p></li>
+<li><p>“VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2).” (Sentence 106)</p></li>
 </ul>
-</section>
-<section id="result-evidence-retrieval-optimal-result-er-optimal">
-<h3>3. Result Evidence Retrieval &#64;Optimal (Result ER &#64;Optimal)<a class="headerlink" href="#result-evidence-retrieval-optimal-result-er-optimal" title="Link to this heading">#</a></h3>
+</li>
+<li><p><strong>VHL Mutation Prevalence</strong>: VHL was mutated in 7 out of 10 tumors in the study.</p>
 <ul class="simple">
-<li><p><strong>Description:</strong> Retrieve the optimal number of sentences covering study aspects labeled as “Results”.</p></li>
-<li><p><strong>Goal:</strong> Focus on retrieving sentences related to results only.</p></li>
+<li><p>“VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2).” (Sentence 106)</p></li>
 </ul>
+</li>
+</ol>
 </section>
-<section id="result-evidence-retrieval-5-result-er-5">
-<h3>4. Result Evidence Retrieval &#64;5 (Result ER &#64;5)<a class="headerlink" href="#result-evidence-retrieval-5-result-er-5" title="Link to this heading">#</a></h3>
+<section id="system-sentence-retrieval">
+<h2>System Sentence Retrieval<a class="headerlink" href="#system-sentence-retrieval" title="Link to this heading">#</a></h2>
+<p><strong>Selected Sentences from Full Paper</strong>: The following sentences from Hoang et al. (2016) are sources of information for the Survey Summary. These sentences are annotated with their corresponding Study Aspects. The EvidenceBench task is to retrieve these sentences given the paper’s full-text.</p>
 <ul class="simple">
-<li><p><strong>Description:</strong> Retrieve no more than 5 sentences related to results.</p></li>
-<li><p><strong>Goal:</strong> Provide targeted evaluation with a limited number of sentences.</p></li>
-</ul>
-</section>
-<section id="result-evidence-retrieval-unconstrained-result-er-unconstrained">
-<h3>5. Result Evidence Retrieval Unconstrained (Result ER Unconstrained)<a class="headerlink" href="#result-evidence-retrieval-unconstrained-result-er-unconstrained" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Description:</strong> Retrieve any number of sentences deemed necessary.</p></li>
-<li><p><strong>Goal:</strong> Maximize coverage without a sentence limit.</p></li>
-</ul>
-<blockquote>
-<div><p><strong>Important:</strong> Each task evaluates different aspects of a model’s ability to retrieve relevant evidence from biomedical papers.</p>
-</div></blockquote>
-</section>
-</section>
-<section id="notes">
-<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Dataset Sources:</strong> The dataset comprises biomedical papers and survey monographs from the International Agency for Research on Cancer (IARC).</p></li>
-<li><p><strong>Train/Test Split:</strong> The dataset is split into training (96 instances), development (37 instances), and test sets (293 instances).</p></li>
-<li><p><strong>Annotation Process:</strong> Sentences in the papers are annotated to determine which provide evidence for the hypotheses, leveraging both expert judgments and automated tools.</p></li>
+<li><p>Sentence 9: Cumulative ingestion of more than 250 mg of AA increased risk of ccRCC (OR, 1.25), and we detected dA-AL-I adducts in 76% of Taiwanese ccRCC patients.</p></li>
+<li><p>Sentence 69: The results (Table 1) indicate an adjusted OR of 1.25 (1.004–1.547) for ccRCC in persons consuming more than 250 mg of AA during the period of 1997 to 2003.</p></li>
+<li><p>Sentence 106: VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2).</p></li>
+<li><p>Sentence 163: Whole-exome sequencing confirmed that the AA mutational signature was present in 6 of 10 ccRCC patients studied.</p></li>
 </ul>
 </section>
 </section>
@@ -513,13 +472,22 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="dataset.html"
+       href="intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Dataset Structure</p>
+        <p class="prev-next-title">Evidence Bench</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="task_formulation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Task Formulation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -537,20 +505,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics">Evaluation Metrics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aspect-recall-k">Aspect Recall @K</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-strategies-for-llms">Evaluation Strategies for LLMs</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-definitions">Task Definitions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-optimal-er-optimal">1. Evidence Retrieval @Optimal (ER @optimal)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evidence-retrieval-10-er-10">2. Evidence Retrieval @10 (ER @10)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-optimal-result-er-optimal">3. Result Evidence Retrieval @Optimal (Result ER @Optimal)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-5-result-er-5">4. Result Evidence Retrieval @5 (Result ER @5)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#result-evidence-retrieval-unconstrained-result-er-unconstrained">5. Result Evidence Retrieval Unconstrained (Result ER Unconstrained)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#survey-sumamry-hypothesis-extraction">Survey Sumamry &amp; Hypothesis Extraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#study-aspect-decomposition">Study Aspect Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-sentence-retrieval">System Sentence Retrieval</a></li>
 </ul>
   </nav></div>
 
