@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Welcome to **EvidenceBench**! Our goal is to provide a robust benchmark for retrieving evidence from biomedical papers that provides evidence for or against scientific hypotheses. Our pipeline involves high-quality, sentence-by-sentence annotations, validated by human experts, across over 400 papers and 700k sentence judgments. 
+Welcome to **EvidenceBench**! Our goal is to provide a robust benchmark for retrieving evidence from biomedical papers that provides evidence for or against scientific hypotheses. Our pipeline involves high-quality, sentence-by-sentence annotations, across over 400 papers and 700k sentence judgments. The pipeline is validated by human domain experts.
 
 
 ![Figure 1](_figs/fig1.png)
