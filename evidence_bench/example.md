@@ -21,18 +21,18 @@ EvidenceBench breaks the Survey Summary into Study Aspects, and then compares th
 
 1. **Increased Risk of ccRCC**
    - Cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC (OR, 1.25).
-   - Sentences reflecting this aspect:
+   - Sentences corresponding to this aspect:
      - "Cumulative ingestion of more than 250 mg of AA increased risk of ccRCC (OR, 1.25), and we detected dA-AL-I adducts in 76% of Taiwanese ccRCC patients." (Sentence 9)
      - "The results (Table 1) indicate an adjusted OR of 1.25 (1.004–1.547) for ccRCC in persons consuming more than 250 mg of AA during the period of 1997 to 2003." (Sentence 69)
 
 2. **AA Mutational Signature**
    - A unique mutation pattern caused by AA was evident in the study.
-   - Sentences reflecting this aspect:
+   - Sentences:
      - "Whole-exome sequencing confirmed that the AA mutational signature was present in 6 of 10 ccRCC patients studied." (Sentence 163)
 
 3. **Frequent Mutation of VHL Gene**
    - The VHL gene mutation was a common occurrence in the patients studied.
-   - Sentences reflecting this aspect:
+   - Sentences:
      - "VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2)." (Sentence 106)
 
 ## Sentence Retrieval Task
