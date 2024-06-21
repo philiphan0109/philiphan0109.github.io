@@ -1,20 +1,23 @@
 # An Example
 
 ## Introduction
-Imagine a scenario where researchers are investigating the link between Aristolochic Acid (AA), a compound found in traditional Chinese herbal medicines, and kidney cancer. This relationship, questioned two decades ago, now has its proof scattered across extensive research literature.
+Imagine a scenario where researchers are trying to determine whether a chemical found in traditional Chinese herbal medicines, Aristolochic Acid (AA), causes kidney cancer. Twenty years ago, this causal relationship was still under investigation. The evidence for this relationship is now spread across a vast research literature.
 
 ## EvidenceBench Task Overview
-EvidenceBench facilitates the extraction of evidence supporting or contesting hypotheses from specific research papers. In this case, the focus is on [Hoang et al. (2016)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5533284/), which investigates the implications of AA on kidney cancer.
+EvidenceBench presents the task of extracting evidence for or against a hypothesis from a specific paper. In this example, the task is to identify evidence from the paper [Hoang et al. (2016)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5533284/).
 
 ## Survey Summary & Hypothesis Extraction
+The Survey Summary provides a ground-truth description of the relevant evidence. It is extracted from a survey article on Aristolochic Acid, and gives a concise overview of key findings from Hoang et al. (2016). The Hypothesis is the central question the researchers are trying to answer, in this case, whether AA-induced DNA mutations cause kidney cancer.
+
+
 **Survey Summary**: 
-Extracted from a comprehensive survey on Aristolochic Acid, this summary encapsulates key findings from Hoang et al. (2016), highlighting that a cumulative ingestion of more than 250 mg of AA increases the risk of developing clear cell renal cell carcinoma (ccRCC) with an odds ratio (OR) of 1.25. Notably, a distinctive AA mutational signature was detected in the majority of the sequenced ccRCC exomes from patients exposed to AA. The VHL gene, crucial in many cell functions, was mutated in most cases studied.
+Results from Hoang et al. (2016) showed that a cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC with an odds ratio (OR) of 1.25. A distinctive AA mutational signature was evident in 6/10 sequenced ccRCC exomes from AA-exposed patients. Among these tumors, VHL, the most frequently mutated gene, mutated in 7 out of 10 samples.
 
 **Hypothesis**: 
-Does AA-induced DNA mutation cause renal carcinoma (RCC)?
+Aristolochic Acid (AA) induced DNA mutation is causal for renal carcinoma (RCC).
 
 ## Study Aspect Decomposition
-EvidenceBench dissects the Survey Summary into specific Study Aspects and aligns them with sentences from Hoang et al. (2016), providing per-sentence annotations:
+EvidenceBench breaks the Survey Summary into Study Aspects, and then compares these aspects to each sentence in Hoang et al. (2016), generating per-sentence annotations for the paper. Below, we show the three Study Aspects for Hoang et al. (2016), along with the sentences from the paper that are sources of information for these aspects.
 
 1. **Increased Risk of ccRCC**
    - Cumulative ingestion of more than 250 mg of AA increased the risk of ccRCC (OR, 1.25).
@@ -32,11 +35,5 @@ EvidenceBench dissects the Survey Summary into specific Study Aspects and aligns
    - Sentences reflecting this aspect:
      - "VHL was the most frequently mutated driver gene (7/10 tumors) in our AA-exposed ccRCCs (Table 2)." (Sentence 106)
 
-## System Sentence Retrieval
-EvidenceBench's task is to retrieve sentences from the full text of Hoang et al. (2016) that are identified as carrying significant information about the Survey Summary. Here are the selected sentences, annotated with their corresponding Study Aspects:
-
-- **Sentence 9**: Demonstrates the increased risk and presence of dA-AL-I adducts.
-- **Sentence 69**: Provides statistical evidence of the increased risk.
-- **Sentence 106**: Details the frequent mutation of the VHL gene.
-- **Sentence 163**: Confirms the presence of the AA mutational signature.
-
+## Sentence Retrieval Task
+The EvidenceBench task is to retrieve the sentences in the paper that provide evidence for the hypothesis. Performance is measured based on how many Study Aspects are covered by the retrieved sentences.
